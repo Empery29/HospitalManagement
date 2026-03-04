@@ -1,0 +1,15 @@
+﻿<h2>Pending Appointments</h2>
+
+<table class="table">
+    <tr>
+        <th>Date</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.AppointmentDate</td>
+            <td>@item.Status</td>
+        </tr>
+    }
+</table>

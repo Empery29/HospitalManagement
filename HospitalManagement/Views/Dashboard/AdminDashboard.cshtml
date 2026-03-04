@@ -1,0 +1,108 @@
+﻿@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2 class="mb-4">Hospital Admin Dashboard</h2>
+
+<div class="row">
+
+    <!-- Total Doctors -->
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body text-center">
+                <h5>Total Doctors</h5>
+                <h2>@Model.TotalDoctors</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Appointments -->
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body text-center">
+                <h5>Total Appointments</h5>
+                <h2>@Model.TotalAppointments</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Appointments -->
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body text-center">
+                <h5>Pending Appointments</h5>
+                <h2>@Model.PendingAppointments</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body text-center">
+                <h5>Total Revenue</h5>
+                <h2>₦@Model.TotalRevenue</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<h4>Revenue Overview</h4>
+
+<canvas id="revenueChart" height="100"></canvas>
+
+<hr />
+
+<h4 class="mt-4">Recent Appointments</h4>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RecentAppointments)
+        {
+            <tr>
+                <td>@item.AppointmentDate.ToShortDateString()</td>
+                <td>
+                    @if (item.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (item.Status == "Completed")
+                    {
+                        <span class="badge bg-success">Completed</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@item.Status</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+            datasets: [{
+                label: 'Revenue (₦)',
+                data: [100000, 150000, 120000, 200000, 180000],
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        }
+    });
+</script>
