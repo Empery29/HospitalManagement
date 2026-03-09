@@ -1,5 +1,7 @@
 ﻿@model BookAppointmentViewModel
-
+@{
+    Layout = "_HospitalLayout";
+}
 <h2>Book Appointment</h2>
 
 @if (TempData["Success"] != null)
@@ -24,7 +26,8 @@
         <label>Appointment Date</label>
         <input asp-for="AppointmentDate"
                type="datetime-local"
-               class="form-control" />
+               class="form-control"
+               asp-format="{0:yyyy-MM-ddTHH:mm}" />
     </div>
 
     <button type="submit"

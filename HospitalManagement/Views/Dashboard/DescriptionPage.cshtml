@@ -1,0 +1,25 @@
+﻿@model Appointment
+@{
+    Layout = "_HospitalLayout";
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Doctor: @Model.Doctor.FullName</h5>
+        <h5 class="card-title">Status: @Model.Status By @Model.Doctor.FullName</h5>
+        <h5 class="card-title">Patient: @Model.PatientUsername</h5>
+
+        <p>Prescription: @Model.Description</p>
+
+    </div>
+    @if (Model.Status == "Completed")
+    {
+        <a asp-controller="Dashboard" asp-action="Approved" asp-route-id="@Model.Id" class="btn btn-success">Done</a>
+
+    }
+</div>

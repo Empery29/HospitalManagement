@@ -35,7 +35,8 @@ namespace HospitalManagement.Controllers
             var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)
+            new Claim(ClaimTypes.Role, user.Role),
+            new Claim(ClaimTypes.NameIdentifier, user.CardId),
         };
 
             var claimsIdentity = new ClaimsIdentity(claims,
@@ -51,9 +52,11 @@ namespace HospitalManagement.Controllers
                 "Doctor" => RedirectToAction("DoctorDashboard", "Dashboard"),
                 "Admin" => RedirectToAction("AdminDashboard", "Dashboard"),
                 "Patient" => RedirectToAction("PatientDashboard", "Dashboard"),
+                "Pharmacy" => RedirectToAction("PharmacyDashboard", "Dashboard"),
                 _ => RedirectToAction("Index", "Home")
             };
         }
+
 
         public async Task<IActionResult> Logout()
         {

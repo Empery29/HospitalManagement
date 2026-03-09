@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "_HospitalLayout";
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+@model Appointment
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Doctor: @Model.Doctor.FullName</h5>
+        <h5 class="card-title">Status: @Model.Status</h5>
+
+</div>
+    <form asp-conroller="Dashboard" asp-action="CreateDescription" method="post">
+        <input name="id" value= "@Model.Id" type= "number" placeholder="Username" class="form-control" hidden  />
+        <textarea name="description" rows="6" cols="50"></textarea>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+</div>

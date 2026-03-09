@@ -1,6 +1,15 @@
 ﻿@model AdminDashboardViewModel
 @{
+    Layout = "_HospitalLayout";
+}
+@{
     ViewData["Title"] = "Admin Dashboard";
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
 }
 
 <h2 class="mb-4">Hospital Admin Dashboard</h2>
@@ -31,7 +40,7 @@
     <div class="col-md-3">
         <div class="card text-white bg-warning mb-3">
             <div class="card-body text-center">
-                <h5>Pending Appointments</h5>
+                <h5>Doctor Pending Appointments</h5>
                 <h2>@Model.PendingAppointments</h2>
             </div>
         </div>
@@ -47,9 +56,33 @@
         </div>
     </div>
 
+    <!-- Pharmacy Pending Requests -->
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body text-center">
+                <h5>Pharmacy Pending Request</h5>
+                <h2>@Model.PharmacyPending</h2>
+            </div>
+        </div>
+    </div>
+    <!-- Total Resolved Appointment For today -->
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body text-center">
+                <h5>Resolved Appointmnet Today</h5>
+                <h2>@Model.TotalResolvedAppointments</h2>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <hr />
+<div>
+      <a asp-controller="Dashboard" asp-action="PatientRegistration" class="btn btn-success">Register Patient</a>  &nbsp;
+    <a asp-controller="Dashboard" asp-action="DoctorRegistration" class="btn btn-success">Register Doctor</a>  &nbsp;
+    <a asp-controller="Dashboard" asp-action="PharmacistRegistration" class="btn btn-success">Register Pharmacist</a>  &nbsp;
+</div>
 
 <h4>Revenue Overview</h4>
 
